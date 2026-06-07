@@ -23,6 +23,10 @@ async function obterOuCriarUsuarioInterno(authUser) {
     .maybeSingle();
 
   if (erroBusca) {
+    console.error("Erro ao buscar usuário interno:", {
+      email,
+      error: erroBusca,
+    });
     throw new Error(erroBusca.message);
   }
 
@@ -82,6 +86,11 @@ export async function salvarPalpiteDoJogo({
     .maybeSingle();
 
   if (erroBusca) {
+    console.error("Erro ao buscar palpite existente:", {
+      usuarioId,
+      jogoId,
+      error: erroBusca,
+    });
     throw new Error(erroBusca.message);
   }
 

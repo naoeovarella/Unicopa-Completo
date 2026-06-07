@@ -549,7 +549,14 @@ export default function App() {
 
       Alert.alert("Palpite salvo", "Seu palpite foi registrado.");
     } catch (error) {
-      Alert.alert("Erro ao salvar palpite", traduzirErroPalpite(error));
+      console.error("Erro ao salvar palpite:", error);
+      const mensagemErro = traduzirErroPalpite(error);
+      const detalhes = error?.details || error?.hint || error?.message;
+
+      Alert.alert(
+        "Erro ao salvar palpite",
+        detalhes ? `${mensagemErro}\n${detalhes}`.trim() : mensagemErro
+      );
     } finally {
       setPalpitesSalvandoPorJogo((palpitesAtuais) => ({
         ...palpitesAtuais,
